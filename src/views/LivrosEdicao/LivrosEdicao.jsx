@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { LivrosService } from '../../api/LivrosService'
 
 const LivrosEdicao = () => {  
+  
   let {livroId} = useParams();
 
   const [livro, setLivro] = useState([])
@@ -17,13 +18,14 @@ const LivrosEdicao = () => {
 
   async function editLivro(){
     const body = {
-        id:Number(livro.id),
-        titulo:livro.titulo,
-        num_paginas: Number(livro.num_paginas),
-        isbn: livro.isbn,
-        editora: livro.editora
+        _id:Number(livro._id),
+        title:livro.title,
+        numberPages: Number(livro.numberPages),
+        ISBN: livro.ISBN,
+        publishCia: livro.publishCia
       }
-    if(livro.id!=undefined && livro.id!='' && livro.titulo!=undefined && livro.titulo!='' && livro.num_paginas!=undefined && livro.num_paginas!='' && livro.isbn !=undefined && livro.isbn !='' && livro.editora !=undefined && livro.editora !=''){
+      console.log(livro)
+    if(livro._id!=undefined && livro._id!='' && livro.title!=undefined && livro.title!='' && livro.numberPages!=undefined && livro.numberPages!='' && livro.ISBN !=undefined && livro.ISBN !='' && livro.publishCia !=undefined && livro.publishCia !=''){
       await LivrosService.updateLivro(Number(livro.id),body)
       .then(({data})=>{
         alert(data.mensagem)
@@ -49,23 +51,23 @@ const LivrosEdicao = () => {
           <form id="formulario">
             <div className='form-group'>
               <label>Id</label>
-              <input type="text" disabled required onChange={(event)=>{ setLivro({...livro, id: event.target.value})}} value={livro.id || ''}></input>
+              <input type="text" disabled  onChange={(event)=>{ setLivro({...livro, _id: event.target.value})}} value={livro._id || ''} placeholder={livro._id}></input>
             </div>
             <div className='form-group'>
               <label>Titulo</label>
-              <input type="text" required onChange={(event)=>{ setLivro({...livro, titulo: event.target.value})}} value={livro.titulo || ''} ></input>
+              <input type="text" onChange={(event)=>{ setLivro({...livro, title: event.target.value})}} value={livro.title || ''} ></input>
             </div>
             <div className='form-group'>
               <label>Número de Páginas</label>
-              <input type="text"  required onChange={(event)=>{ setLivro({...livro, num_paginas: event.target.value})}} value={livro.num_paginas || ''}></input>
+              <input type="text"  onChange={(event)=>{ setLivro({...livro, numberPages: event.target.value})}} value={livro.numberPages || ''}></input>
             </div>
             <div className='form-group'>
               <label>ISBN</label>
-              <input type="text"  required onChange={(event)=>{ setLivro({...livro, isbn: event.target.value})}} value={livro.isbn || ''}></input>
+              <input type="text"  onChange={(event)=>{ setLivro({...livro, ISBN: event.target.value})}} value={livro.ISBN || ''}></input>
             </div>
             <div className='form-group'>
               <label>Editora</label>
-              <input type="text"  required onChange={(event)=>{ setLivro({...livro, editora: event.target.value})}} value={livro.editora || ''}></input>
+              <input type="text" onChange={(event)=>{ setLivro({...livro, publishCia: event.target.value})}} value={livro.publishCia || ''}></input>
             </div> 
             <div className='form-group'>
               <button onClick={()=>{

@@ -11,7 +11,8 @@ const Livros = () => {
 
   async function getLivros(){
     const {data} = await LivrosService.getLivros();
-    setLivros(data)
+    setLivros(data.resposta);
+   console.log(data.resposta);
   }
 
   async function deleteLivro(livroId){
@@ -32,6 +33,7 @@ const Livros = () => {
     getLivros()    
   },[])  
 
+
   return (
   <>
     <Header/>    
@@ -40,9 +42,10 @@ const Livros = () => {
         <h1>Escolha o seu livro</h1>        
         <ul>
         {livros.map((livro) =>(
-          <li key={livro.id}>
-            {livro.titulo} 
-            <span>{livro.editora}</span>
+          <li key={livro._id}>
+            {livro.title} 
+            <span>{livro.publishCia}</span>
+            <span>{livro._id}</span>
             <div className='botoes'>
               <div>
                 <Link className='btn edit' to={`/livros/edicao/${livro.id}`}>
@@ -52,7 +55,7 @@ const Livros = () => {
                 </Link>
               </div>
               <div>
-                <Link className='btn delete' onClick={()=>{ deleteLivro(livro.id)}}>
+                <Link className='btn delete' onClick={()=>{ deleteLivro(livro._id)}}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                   <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                   </svg>
