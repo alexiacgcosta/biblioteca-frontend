@@ -10,7 +10,7 @@ export class LivrosService{
     }
 
     static getLivro(id){
-        return axios.get(`${BASE_URL}/livros/${id}`);
+        return axios.get(`${BASE_URL}/obter/livro/${id}`);
     }
 
     static createLivro(body){
